@@ -1,16 +1,18 @@
 // Cart.js
 import React, { useContext } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity ,Button} from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity ,Button,Image} from 'react-native';
 import { CartContext } from './CartContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Cart = ({ navigation }) => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
 
-  const renderItem = ({ item }) => (
-    <View style={styles.cartItem}>
-      <Text style={styles.cartItemText}>{item.name}</Text>
-      <Text style={styles.cartItemText}>${item.price}</Text>
+  const renderCartItem= ({ item }) => (
+    <View style={styles.itemContainer}>
+      <Text style={styles.itemText}>{item.name}</Text>
+      <Image source={{ uri: item.logo }} style={styles.CartImage} />
+      <Text style={styles.itemText}>${item.price}</Text>
+
 
       <View style={styles.quantityContainer}>
         <TouchableOpacity onPress={() => updateQuantity(item.id, item.quantity - 1)}>
@@ -21,6 +23,7 @@ const Cart = ({ navigation }) => {
           <Text style={styles.quantityButton}>+</Text>
         </TouchableOpacity>
       </View>
+
       <Button title="Remove" onPress={() => removeFromCart(item.id)} />
     </View>
   );
@@ -31,9 +34,9 @@ const Cart = ({ navigation }) => {
       <Text style={styles.title}>Cart</Text>
 
       <FlatList
-         data={cartItems}
-         renderItem={renderItem}
-         keyExtractor={item => item.id.toString()}
+        data={cartItems}
+        renderItem={renderCartItem}
+        keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.cartList}
       />
        <Button title="Proceed to Checkout" onPress={() => navigation.navigate('Checkout')} />
@@ -47,7 +50,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
+  CartImage: {
+    width: 100,
 
+    height: 100,
+    borderRadius: 5,
+  },
   cartItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',

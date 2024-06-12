@@ -43,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.productPrice}>${item.price}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.addToCartButton} onPress={() => {/* Handle add to cart action */}}>
+      <TouchableOpacity style={styles.addToCartButton} onPress={() => addToCart(item)}>
         <Icon name="cart-outline" size={20} color="#fff" />
       </TouchableOpacity>
     </View>
