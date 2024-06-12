@@ -20,7 +20,9 @@ import Search from "./screens/Search";
 import HomeScreen from "./screens/HomeScreen";
 import ProductDetails from "./screens/ProductDetails";
 import Checkout from "./screens/Checkout";
+import OrderConfirmation from './screens/OrderConfirmation';
 import Favorites from "./screens/Favorites";
+
 
 const Drawer = createDrawerNavigator();
 
@@ -32,6 +34,7 @@ const MainStack = () => {
       <Stack.Screen name="ProductDetails" component={ProductDetails} /> 
       <Stack.Screen name="Cart" component={Cart} /> 
       <Stack.Screen name="Checkout" component={Checkout} />  
+      <Stack.Screen name="OrderConfirmation" component={OrderConfirmation} />
     </Stack.Navigator> 
   )
 }
@@ -57,7 +60,7 @@ const App = () => {
             <Drawer.Screen name="Register" component={Register} />
             <Drawer.Screen name="Login" component={Login} />
             <Drawer.Screen name="Cart" component={Cart} />
-            <Drawer.Screen name="CartContext" component={CartContext} />
+            {/* <Drawer.Screen name="CartContext" component={CartContext} /> */}
           </Drawer.Navigator>
         </NavigationContainer>
       </CartProvider>
