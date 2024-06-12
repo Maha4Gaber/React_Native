@@ -31,9 +31,19 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = (product) => {
-    const updatedCart = [...cartItems, { ...product, quantity: 1 }];
-    setCartItems(updatedCart);
-    saveCart(updatedCart);
+    const existingItem = cartItems.find(item => item.id === product.id);
+
+    if (existingItem) {
+      const updatedCart = cartItems.map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCartItems(updatedCart);
+      saveCart(updatedCart);
+    } else {
+      const updatedCart = [...cartItems, { ...product, quantity: 1 }];
+      setCartItems(updatedCart);
+      saveCart(updatedCart);
+    }
   };
 
   const removeFromCart = (productId) => {
@@ -42,12 +52,16 @@ export const CartProvider = ({ children }) => {
     saveCart(updatedCart);
   };
 
-  const updateQuantity = (productId, newQuantity) => {
-    const updatedCart = cartItems.map(item =>
-      item.id === productId ? { ...item, quantity: newQuantity } : item
-    ).filter(item => item.quantity > 0);
-    setCartItems(updatedCart);
-    saveCart(updatedCart);
+  const updateQuantity = (id, newQuantity) => {
+    if (newQuantity < 1) {
+      removeFromCart(id);
+    } else {
+      const updatedCart = cartItems.map(item =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      );
+      setCartItems(updatedCart);
+      saveCart(updatedCart);
+    }
   };
 
   return (
