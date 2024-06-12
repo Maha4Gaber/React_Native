@@ -9,6 +9,7 @@ const Stack = createNativeStackNavigator();
 // const Tab = createBottomTabNavigator();
 // ------------------Drawer Navigation------------
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import FavScreen from './FavScreen';
 
 import { CartContext, CartProvider } from "./screens/CartContext";
 
@@ -22,6 +23,7 @@ import ProductDetails from "./screens/ProductDetails";
 import Checkout from "./screens/Checkout";
 import OrderConfirmation from './screens/OrderConfirmation';
 import Favorites from "./screens/Favorites";
+import { FavProvider } from './FavContext';
 
 
 const Drawer = createDrawerNavigator();
@@ -33,6 +35,7 @@ const MainStack = () => {
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="ProductDetails" component={ProductDetails} /> 
       <Stack.Screen name="Cart" component={Cart} /> 
+      <Stack.Screen name="Favorites" component={FavScreen} />
       <Stack.Screen name="Checkout" component={Checkout} />  
       <Stack.Screen name="OrderConfirmation" component={OrderConfirmation} />
     </Stack.Navigator> 
