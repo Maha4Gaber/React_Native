@@ -22,8 +22,9 @@ const HomeScreen = ({ navigation }) => {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <Text>Loading...</Text>
+        <Text>Loading...
         <ActivityIndicator size="large" color="#D6758D" />
+        </Text>
       </View>
     );
   }
