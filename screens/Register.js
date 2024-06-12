@@ -122,44 +122,49 @@ const Register = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
+    // justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 40,
+    backgroundColor:'#f3f3f336',
+    paddingVertical: 150,
   },
   formGroup: {
-    width: '100%',
+    width: "100%",
     marginBottom: 16,
   },
   input: {
     height: 40,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 4,
     paddingHorizontal: 12,
+    borderWidth:1,
+    borderColor:'#D6758D',
+    marginBottom:20
   },
   errorInput: {
-    borderColor: 'red',
+    borderColor: "red",
   },
   errorText: {
-    color: 'red',
+    color: "red",
     marginTop: 4,
   },
   togglePassword: {
-    position: 'absolute',
+    position: "absolute",
     right: 12,
-    top: 10,
-    color: '#666',
+    top: -50,
+    color: "#666",
+    // margin:10,
   },
   submitButton: {
-    backgroundColor: '#007AFF',
-    borderRadius: 4,
-    paddingVertical: 12,
-    paddingHorizontal: 24,
+    backgroundColor: '#D6758D',
+    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   submitButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
-
 export default Register;
