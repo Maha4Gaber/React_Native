@@ -10,7 +10,7 @@ const HomeScreen = ({ navigation }) => {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch('https://retoolapi.dev/pmRHmd/data')
+    fetch('https://retoolapi.dev/g1lm2L/data')
       .then(response => response.json())
       .then(data => {
         setProducts(data);
