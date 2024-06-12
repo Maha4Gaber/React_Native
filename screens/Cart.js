@@ -1,18 +1,17 @@
 // Cart.js
 import React, { useContext } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity ,Button,Image} from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button, Image } from 'react-native';
 import { CartContext } from './CartContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Cart = ({ navigation }) => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
 
-  const renderCartItem= ({ item }) => (
+  const renderCartItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Text style={styles.itemText}>{item.name}</Text>
       <Image source={{ uri: item.logo }} style={styles.CartImage} />
-      <Text style={styles.itemText}>${item.price}</Text>
-
+      <Text style={styles.itemText}>${item.price *item.quantity }</Text>
 
       <View style={styles.quantityContainer}>
         <TouchableOpacity onPress={() => updateQuantity(item.id, item.quantity - 1)}>
@@ -28,19 +27,16 @@ const Cart = ({ navigation }) => {
     </View>
   );
 
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Cart</Text>
-
       <FlatList
         data={cartItems}
         renderItem={renderCartItem}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.cartList}
       />
-       <Button title="Proceed to Checkout" onPress={() => navigation.navigate('Checkout')} />
-
+      <Button title="Proceed to Checkout" onPress={() => navigation.navigate('Checkout')} />
     </View>
   );
 };
@@ -52,7 +48,6 @@ const styles = StyleSheet.create({
   },
   CartImage: {
     width: 100,
-
     height: 100,
     borderRadius: 5,
   },
@@ -67,7 +62,6 @@ const styles = StyleSheet.create({
   cartItemText: {
     fontSize: 16,
   },
-
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -95,6 +89,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
 });
-
 
 export default Cart;
