@@ -7,7 +7,7 @@ const HomeScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://retoolapi.dev/lJJFUW/data')
+    fetch('https://retoolapi.dev/pmRHmd/data')
       .then(response => response.json())
       .then(data => {
         setProducts(data);
@@ -32,7 +32,7 @@ const HomeScreen = ({ navigation }) => {
       <TouchableOpacity 
         onPress={() => navigation.navigate('Product_Details', { productId: item.id })}
       >
-        <Image source={{ uri: item.image }} style={styles.productImage} />
+        <Image source={{ uri: item.logo }} style={styles.productImage} />
         <Text style={styles.productName}>{item.name}</Text>
         <Text style={styles.productDescription}>{item.description}</Text>
         <Text style={styles.productPrice}>${item.price}</Text>
@@ -49,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
       renderItem={renderProduct} 
       keyExtractor={item => item.id.toString()} 
       contentContainerStyle={styles.productList}
-      numColumns={3}
+      numColumns={2}
     />
   );
 }
@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
-    maxWidth: (Dimensions.get('window').width / 3) - 20, // Adjusting for margins and padding
+    // maxWidth: (Dimensions.get('window').width / 3) - 20, // Adjusting for margins and padding
     position: 'relative',  // Needed for positioning the add to cart button
   },
   productImage: {
     width: '100%',
-    height: '100px',
+    height: 220,
     borderRadius: 5,
   },
   productName: {
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
     right: 10,
-    backgroundColor: '#ff6347',  // Example color, can be changed
+    backgroundColor: '#D6758D',  // Example color, can be changed
     borderRadius: 20,
     padding: 5,
   },
