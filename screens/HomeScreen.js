@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+// HomeScreen.js
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { CartContext } from './CartContext';
 
 const HomeScreen = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     fetch('https://retoolapi.dev/lJJFUW/data')
@@ -37,7 +40,7 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.productDescription}>{item.description}</Text>
         <Text style={styles.productPrice}>${item.price}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.addToCartButton} onPress={() => {/* Handle add to cart action */}}>
+      <TouchableOpacity style={styles.addToCartButton} onPress={() => addToCart(item)}>
         <Icon name="cart-outline" size={24} color="#fff" />
       </TouchableOpacity>
     </View>
@@ -49,7 +52,7 @@ const HomeScreen = ({ navigation }) => {
       renderItem={renderProduct} 
       keyExtractor={item => item.id.toString()} 
       contentContainerStyle={styles.productList}
-      numColumns={3}
+      numColumns={2}
     />
   );
 }
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
   },
   productImage: {
     width: '100%',
-    height: '100px',
+    height: 100,
     borderRadius: 5,
   },
   productName: {

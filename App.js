@@ -1,6 +1,7 @@
 
 import { NavigationContainer } from "@react-navigation/native";
 //-------------------Stack Navigation-------------
+// import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 //-------------------Tabs Nvaigation--------------
@@ -27,7 +28,8 @@ const MainStack = () => {
   return (
     <Stack.Navigator> 
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="ProductDetails" component={ProductDetails} />  
+      <Stack.Screen name="ProductDetails" component={ProductDetails} /> 
+      <Stack.Screen name="Cart" component={Cart} /> 
       <Stack.Screen name="Checkout" component={Checkout} />  
     </Stack.Navigator> 
   )
