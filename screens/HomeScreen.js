@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
+import {ActivityIndicator, View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const HomeScreen = ({ navigation }) => {
@@ -23,6 +23,7 @@ const HomeScreen = ({ navigation }) => {
     return (
       <View style={styles.loadingContainer}>
         <Text>Loading...</Text>
+        <ActivityIndicator size="large" color="#D6758D" />
       </View>
     );
   }
@@ -38,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.productPrice}>${item.price}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.addToCartButton} onPress={() => {/* Handle add to cart action */}}>
-        <Icon name="cart-outline" size={24} color="#fff" />
+        <Icon name="cart-outline" size={20} color="#fff" />
       </TouchableOpacity>
     </View>
   );
