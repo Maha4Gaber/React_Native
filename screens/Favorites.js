@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, Text } from 'react-native';
-import {Card, Button,  Title, Paragraph } from 'react-native-paper';
+import {Card, Button,  Title, Paragraph } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 // import axios from 'axios';
 
