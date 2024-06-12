@@ -10,7 +10,7 @@ const HomeScreen = ({ navigation }) => {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch('https://retoolapi.dev/pmRHmd/data')
+    fetch('https://retoolapi.dev/g1lm2L/data')
       .then(response => response.json())
       .then(data => {
         setProducts(data);
@@ -43,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.productPrice}>${item.price}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.addToCartButton} onPress={() => {/* Handle add to cart action */}}>
+      <TouchableOpacity style={styles.addToCartButton} onPress={() => addToCart(item)}>
         <Icon name="cart-outline" size={20} color="#fff" />
       </TouchableOpacity>
     </View>

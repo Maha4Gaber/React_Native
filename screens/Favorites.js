@@ -1,10 +1,10 @@
-// import React, { useEffect, useState } from 'react';
-// import { View, FlatList, Text } from 'react-native';
-// import { Button, Card, Title, Paragraph } from 'react-native-paper';
-// import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { View, FlatList, Text } from 'react-native';
+import {Card, Button,  Title, Paragraph } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 // import axios from 'axios';
 
-function MoviesListScreen({ navigation }) {
+function Favorites({ navigation }) {
   const [movies, setMovies] = useState([]);
   const favorites = useSelector(state => state.movies.favorites);
   const dispatch = useDispatch();
@@ -48,4 +48,4 @@ function MoviesListScreen({ navigation }) {
   );
 }
 
-export default MoviesListScreen;
+export default Favorites;
