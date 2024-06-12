@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+// import React from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import  { useState,useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Register = () => {
+const Register = () => ({navigation}) => {
+  const [users, setusers] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -12,7 +15,7 @@ const Register = () => {
   const [phoneError, setPhoneError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
  
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     let isValid = true;
  
     if (username.length < 3) {
@@ -45,13 +48,40 @@ const Register = () => {
  
     if (isValid) {
       // Submit the form
-      console.log('Username:', username);
-      console.log('Password:', password);
-      console.log('Email:', email);
-      console.log('Phone:', phone);
+      setusers([...users,{
+        username:username,
+        password:password,
+        email:email,
+        phone:phone
+      }])
+      const newUser = {
+        username: username,
+        password: password,
+        email: email,
+        phone: phone
+      };
+      const updatedUsers = [...users, newUser];
+        try {
+          await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
+          navigation.navigate('Login')
+        } catch (error) {
+          console.error('Failed to save cart items', error);
+        }
+        data()
     }
   };
- 
+ const data=async()=>{
+  try {
+    const us = await AsyncStorage.getItem('users');
+    if (us !== null) {
+      setusers(JSON.parse(us));
+      console.log(us);
+    }
+  } catch (error) {
+    console.error('Error fetching users: ', error);
+  }
+
+ }
   const isValidEmail = (email) => {
     // Simple email validation pattern
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -61,6 +91,24 @@ const Register = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  // let users=[]
+  useEffect(() => {
+    const loadCart = async () => {
+      try {
+        const storedCart = await AsyncStorage.getItem('users');
+        if (storedCart) {
+          setusers(JSON.parse(storedCart));
+          console.log(JSON.parse(storedCart));
+        }
+      } catch (error) {
+        console.error('Failed to load cart items', error);
+      }
+    };
+ 
+    loadCart();
+  }, []);
+ 
  
   return (
 <View style={styles.container}>

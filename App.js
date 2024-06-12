@@ -1,13 +1,7 @@
-
+import React, { useEffect } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
-//-------------------Stack Navigation-------------
-// import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
-//-------------------Tabs Nvaigation--------------
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// const Tab = createBottomTabNavigator();
-// ------------------Drawer Navigation------------
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { CartContext, CartProvider } from "./screens/CartContext";
