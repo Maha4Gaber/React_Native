@@ -1,9 +1,10 @@
-// import React from 'react';
+import React from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import  { useState,useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Register = () => ({navigation}) => {
+const Register = ({navigation}) => {
   const [users, setusers] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -60,7 +61,17 @@ const Register = () => ({navigation}) => {
         email: email,
         phone: phone
       };
+      
       const updatedUsers = [...users, newUser];
+      
+      // Convert the updated user array to JSON and store it in AsyncStorage
+      // AsyncStorage.setItem('users', JSON.stringify(updatedUsers))
+      //   .then(() => {
+      //     console.log('User added successfully!');
+      //   })
+      //   .catch(error => {
+      //     console.error('Error adding user: ', error);
+      //   });
         try {
           await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
           navigation.navigate('Login')
@@ -68,6 +79,11 @@ const Register = () => ({navigation}) => {
           console.error('Failed to save cart items', error);
         }
         data()
+      // await AsyncStorage.setItem('users',users)
+      // console.log('Username:', username);
+      // console.log('Password:', password);
+      // console.log('Email:', email);
+      // console.log('Phone:', phone);
     }
   };
  const data=async()=>{
@@ -109,7 +125,7 @@ const Register = () => ({navigation}) => {
     loadCart();
   }, []);
  
- 
+
   return (
 <View style={styles.container}>
 <View style={styles.formGroup}>
@@ -161,7 +177,7 @@ const Register = () => ({navigation}) => {
 </View>
  
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-<Text style={styles.submitButtonText}>Register</Text>
+<Text style={styles.submitButtonText}>SignUpScreen</Text>
 </TouchableOpacity>
 </View>
   );
@@ -215,4 +231,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+
 export default Register;

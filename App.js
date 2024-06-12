@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import FavScreen from './FavScreen';
 
 import { CartContext, CartProvider } from "./screens/CartContext";
 
@@ -16,8 +15,7 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductDetails from "./screens/ProductDetails";
 import Checkout from "./screens/Checkout";
 import OrderConfirmation from './screens/OrderConfirmation';
-import Favorites from "./screens/Favorites";
-import { FavProvider } from './FavContext';
+// import Favorites from "./screens/Favorites";
 
 
 const Drawer = createDrawerNavigator();
@@ -29,7 +27,7 @@ const MainStack = () => {
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="ProductDetails" component={ProductDetails} /> 
       <Stack.Screen name="Cart" component={Cart} /> 
-      <Stack.Screen name="Favorites" component={FavScreen} />
+      {/* <Stack.Screen name="Favorites" component={FavScreen} /> */}
       <Stack.Screen name="Checkout" component={Checkout} />  
       <Stack.Screen name="OrderConfirmation" component={OrderConfirmation} />
     </Stack.Navigator> 
@@ -52,7 +50,7 @@ const App = () => {
         <NavigationContainer> 
           <Drawer.Navigator>
             <Drawer.Screen name="Amazon" component={MainStack} />
-            <Drawer.Screen name="Favorites" component={Favorites} />
+            {/* <Drawer.Screen name="Favorites" component={Favorites} /> */}
             <Drawer.Screen name="Search" component={Search} />
             <Drawer.Screen name="Register" component={Register} />
             <Drawer.Screen name="Login" component={Login} />
