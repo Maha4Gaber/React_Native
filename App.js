@@ -19,6 +19,7 @@ import Search from "./screens/Search";
 import HomeScreen from "./screens/HomeScreen";
 import ProductDetails from "./screens/ProductDetails";
 import Checkout from "./screens/Checkout";
+import Favorites from "./screens/Favorites";
 
 const Drawer = createDrawerNavigator();
 
@@ -49,6 +50,7 @@ const App = () => {
         <NavigationContainer> 
           <Drawer.Navigator>
             <Drawer.Screen name="Amazon" component={MainStack} />
+            <Drawer.Screen name="Favorites" component={Favorites} />
             <Drawer.Screen name="Search" component={Search} />
             <Drawer.Screen name="Register" component={Register} />
             <Drawer.Screen name="Login" component={Login} />
