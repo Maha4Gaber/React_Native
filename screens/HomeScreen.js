@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect,useContext } from 'react';
 import {ActivityIndicator, View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { CartContext } from './CartContext';
 
 const HomeScreen = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     fetch('https://retoolapi.dev/pmRHmd/data')
@@ -39,7 +42,8 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.productDescription}>{item.description}</Text>
         <Text style={styles.productPrice}>${item.price}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.addToCartButton} onPress={() => {/* Handle add to cart action */}}>
+
+      <TouchableOpacity style={styles.addToCartButton} onPress={() => addToCart(item)}>
         <Icon name="cart-outline" size={20} color="#fff" />
       </TouchableOpacity>
     </View>
@@ -81,6 +85,7 @@ const styles = StyleSheet.create({
   },
   productImage: {
     width: '100%',
+
     height: 220,
     borderRadius: 5,
   },
