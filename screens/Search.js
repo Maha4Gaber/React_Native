@@ -1,23 +1,14 @@
-// import React from 'react';
-// import { Text } from 'react-native';
 
-// const Search = () => {
-//   return (
-//     <Text>Search</Text>
-//   );
-// }
 
-// export default Search;
-
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { View, Text, TextInput, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { debounce } from 'lodash';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Ionicons'; // Import Ionicons from react-native-vector-icons
-//import { CartContext } from '../CartContext'; // Correct import path
+import { CartContext } from './CartContext'; // Correct import path
 
-const Search = () => {
-  //const { addToCart } = useContext(CartContext);
+const Search = ({navigation}) => {
+  const { addToCart } = useContext(CartContext);
   const [searchText, setSearchText] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -28,15 +19,17 @@ const Search = () => {
       setLoading(true);
       try {
         const response = await axios.get('https://retoolapi.dev/g1lm2L/data');
-        console.log('API Response:', response.data);
         if (!Array.isArray(response.data)) {
           console.error('Invalid API response: Expected an array of products');
           return;
         }
-        const filteredData = response.data.filter(product =>
-           product.name.toLowerCase().includes(searchText.toLowerCase())
+        const filteredData = response.data
+          .filter(product =>
+          product.name
+          .toLowerCase()
+          .includes(searchText.toLowerCase()
+          )
         );
-        console.log('Filtered Data:', filteredData);
         setResults(filteredData);
       } catch (error) {
         console.error('Failed to fetch data:', error);
@@ -57,7 +50,6 @@ const Search = () => {
   const debouncedSearch = useCallback(debounce((text) => setSearchText(text), 300), []);
 
   const handleSearch = (text) => {
-    console.log('Search Text:', text);
     debouncedSearch(text);
   };
   
@@ -65,16 +57,16 @@ const Search = () => {
   const renderProduct = ({ item }) => (
     <View style={styles.productContainer}>
       <TouchableOpacity 
-        onPress={() => navigation.navigate('Product_Details', { productId: item.id })}
+        onPress={() => navigation.navigate('ProductDetails', { productId: item.id })}
       >
         <Image source={{ uri: item.logo }} style={styles.productImage} />
         <Text style={styles.productName}>{item.name}</Text>
         <Text style={styles.productDescription}>{item.description}</Text>
         <Text style={styles.productPrice}>${item.price}</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity style={styles.addToCartButton} onPress={() => addToCart(item)}>
+      <TouchableOpacity style={styles.addToCartButton} onPress={() => addToCart(item)}>
         <Icon name="cart-outline" size={24} color="#fff" />
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   );
 
@@ -86,7 +78,7 @@ const Search = () => {
         value={searchText}
         onChangeText={handleSearch}
       />
-      {loading && <ActivityIndicator size="large" color="#0000ff" />}
+      {loading && <ActivityIndicator size="large" color="#D6758D" />}
       <FlatList
         data={results}
         renderItem={renderProduct}

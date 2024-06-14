@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import {TouchableOpacity, View, Text, StyleSheet, Button } from 'react-native';
 
 const OrderConfirmation = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Order Confirmation</Text>
       <Text style={styles.message}>Thank you for your order!</Text>
-      <Button title="Back to Home" onPress={() => navigation.navigate('HomeScreen')} />
+      <TouchableOpacity style={styles.submitButton} onPress={() => navigation.navigate('HomeScreen')}>
+        <Text style={styles.submitButtonText}>Back to Home</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -27,6 +29,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     marginBottom: 32,
+  },
+  submitButton: {
+    backgroundColor: '#D6758D',
+    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  submitButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    width:'100%',
+    textAlign:'center'
   },
 });
 

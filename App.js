@@ -24,10 +24,9 @@ const Drawer = createDrawerNavigator();
 const MainStack = () => {
   return (
     <Stack.Navigator> 
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="ProductDetails" component={ProductDetails} /> 
       <Stack.Screen name="Cart" component={Cart} /> 
-      {/* <Stack.Screen name="Favorites" component={FavScreen} /> */}
       <Stack.Screen name="Checkout" component={Checkout} />  
       <Stack.Screen name="OrderConfirmation" component={OrderConfirmation} />
     </Stack.Navigator> 
@@ -36,26 +35,14 @@ const MainStack = () => {
 
 const App = () => {
   return (
-    
-        // <NavigationContainer> 
-        //   <Drawer.Navigator>
-        //     <Drawer.Screen name="Amazon" component={MainStack} />
-        //     <Drawer.Screen name="Search" component={Search} />
-        //     <Drawer.Screen name="Register" component={Register} />
-        //     <Drawer.Screen name="Login" component={Login} />
-        //     <Drawer.Screen name="Cart" component={Cart} />
-        //   </Drawer.Navigator>
-        // </NavigationContainer>
         <CartProvider>
         <NavigationContainer> 
           <Drawer.Navigator>
             <Drawer.Screen name="Amazon" component={MainStack} />
-            {/* <Drawer.Screen name="Favorites" component={Favorites} /> */}
             <Drawer.Screen name="Search" component={Search} />
             <Drawer.Screen name="Register" component={Register} />
             <Drawer.Screen name="Login" component={Login} />
             <Drawer.Screen name="Cart" component={Cart} />
-            {/* <Drawer.Screen name="CartContext" component={CartContext} /> */}
           </Drawer.Navigator>
         </NavigationContainer>
       </CartProvider>

@@ -177,7 +177,7 @@ const Register = ({navigation}) => {
 </View>
  
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-<Text style={styles.submitButtonText}>SignUpScreen</Text>
+<Text style={styles.submitButtonText}>Register</Text>
 </TouchableOpacity>
 </View>
   );

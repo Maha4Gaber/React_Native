@@ -88,6 +88,18 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 5,
   },
+  submitButton: {
+    backgroundColor: '#D6758D',
+    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  submitButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    width:'100%',
+    textAlign:'center'
+  },
 });
 
 export default ProductDetails;
