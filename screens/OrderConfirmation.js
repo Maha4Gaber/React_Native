@@ -6,7 +6,7 @@ const OrderConfirmation = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Order Confirmation</Text>
       <Text style={styles.message}>Thank you for your order!</Text>
-      <TouchableOpacity style={styles.submitButton} onPress={() => navigation.navigate('HomeScreen')}>
+      <TouchableOpacity style={styles.submitButton} onPress={() => navigation.navigate('Home')}>
         <Text style={styles.submitButtonText}>Back to Home</Text>
       </TouchableOpacity>
     </View>

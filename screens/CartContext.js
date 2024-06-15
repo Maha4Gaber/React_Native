@@ -30,8 +30,9 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const addToCart = (product) => {
-    const existingItem = cartItems.find(item => item.id === product.id);
+  const addToCart = async(product) => {
+    // if (await AsyncStorage.getItem('useremail')) {
+      const existingItem = cartItems.find(item => item.id === product.id);
 
     if (existingItem) {
       const updatedCart = cartItems.map(item =>
@@ -44,6 +45,12 @@ export const CartProvider = ({ children }) => {
       setCartItems(updatedCart);
       saveCart(updatedCart);
     }
+    // }
+    // else{
+    //   // .navigate('Login')
+    //   console.log(children);
+      
+    // }
   };
 
   const removeFromCart = (productId) => {

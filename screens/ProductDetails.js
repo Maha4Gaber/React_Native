@@ -1,26 +1,38 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { TouchableOpacity,View, Text, StyleSheet, Image } from 'react-native';
-import { CartContext } from './CartContext';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React, { useContext, useEffect, useState } from "react";
+import {ActivityIndicator, TouchableOpacity, View, Text, StyleSheet, Image } from "react-native";
+import { CartContext } from "./CartContext";
+import Icon from "react-native-vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const ProductDetails = ({route}) => {
+const ProductDetails = ({ route, navigation }) => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch('https://retoolapi.dev/g1lm2L/data/' + route.params.productId)
-      .then(response => response.json())
-      .then(data => {
+    fetch("https://retoolapi.dev/g1lm2L/data/" + route.params.productId)
+      .then((response) => response.json())
+      .then((data) => {
         setProduct(data);
         setLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         setLoading(false);
       });
   }, []);
-  console.log(route.params);
+  // console.log(route.params);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>
+          Loading...
+          <ActivityIndicator size="large" color="#D6758D" />
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -32,7 +44,16 @@ const ProductDetails = ({route}) => {
         <Text style={styles.productPrice}>Price: ${product.price}</Text>
         {/* Add other product details here */}
       </View>
-      <TouchableOpacity style={styles.addToCartButton} onPress={() => addToCart(product)}>
+      <TouchableOpacity
+        style={styles.addToCartButton}
+        onPress={async () => {
+          if (await AsyncStorage.getItem("useremail")) {
+            addToCart(product);
+          } else {
+            navigation.navigate("Login");
+          }
+        }}
+      >
         <Icon name="cart-outline" size={20} color="#fff" />
       </TouchableOpacity>
     </View>
@@ -40,29 +61,35 @@ const ProductDetails = ({route}) => {
 };
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     padding: 20,
-    backgroundColor: '#f0f0f0',
+    paddingVertical:50,
+    backgroundColor: "#f0f0f0",
   },
   card: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     margin: 5,
     padding: 10,
     borderRadius: 5,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
-    position: 'relative',
+    position: "relative",
   },
   productName: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   productDescription: {
@@ -71,25 +98,25 @@ const styles = StyleSheet.create({
   },
   productPrice: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#D6758D',
+    fontWeight: "bold",
+    color: "#D6758D",
   },
   productImage: {
-    width: '100%',
+    width: "100%",
     height: 200, // Set the height of the image as desired
     marginBottom: 10,
     borderRadius: 10,
   },
   addToCartButton: {
-    position: 'absolute',
-    bottom: 50,
-    right: 50,
-    backgroundColor: '#D6758D',  // Example color, can be changed
+    position: "absolute",
+    bottom: 65,
+    right: 40,
+    backgroundColor: "#D6758D", // Example color, can be changed
     borderRadius: 20,
     padding: 5,
   },
   submitButton: {
-    backgroundColor: '#D6758D',
+    backgroundColor: "#D6758D",
     borderRadius: 25,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -97,8 +124,8 @@ const styles = StyleSheet.create({
   submitButtonText: {
     color: "#fff",
     fontWeight: "bold",
-    width:'100%',
-    textAlign:'center'
+    width: "100%",
+    textAlign: "center",
   },
 });
 
